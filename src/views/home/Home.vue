@@ -10,10 +10,10 @@
       <home-swiper :banners="banners"/>
       <recommend-view-test :recommends="recommends"/>
       <feature-view/>
-      <tab-control-test class="tab-control"
+      <tab-control-test
                    :titles="['流行', '新款', '精选']"
-                   @tabClick="tabClick"/>
-      <good-list :goods="showGoods"/>
+                   />
+<!--      <good-list :goods="showGoods"/>-->
     </scroll>
     <div>呵呵呵呵</div>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
@@ -100,7 +100,8 @@
         this.isShowBackTop = (-position.y) > 1000
       },
       loadMore() {
-        this.getHomeGoods(this.currentType)
+        this.getHomeGoods(this.currentType);
+        this.$refs.scroll.scroll.refresh();
       },
       /**
        * 网络请求相关的方法
@@ -113,10 +114,9 @@
         })
       },
       getHomeGoods(type) {
-        const page = this.goods[type].page + 1
-        getHomeGoods(type, page).then(res => {
+        this.goods[type].page += 1
+        getHomeGoods(type, this.goods[type].page).then(res => {
           this.goods[type].list.push(...res.data.list)
-          this.goods[type].page += 1
 
           this.$refs.scroll.finishPullUp()
         })

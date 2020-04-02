@@ -1,24 +1,25 @@
 <template>
-    <div class="recommends">
-       <div v-for="(item, index) in recommends" class="recommend-item" :key="index">
-         <a :href="item.link">
-           <img :src="item.image">
-           <div>{{item.title}}</div>
-         </a>
-       </div>
+  <div class="recommends">
+    <div v-for="(item,index) in recommends" class="recommends-item">
+      <a :href="item.link">
+        <img :src="item.image">
+        <div>{{item.title}}</div>
+      </a>
     </div>
+  </div>
+
 </template>
 
 <script>
     export default {
         name: "RecommendViewTest",
         props:{
-          recommends:{
-            type:Array,
-            default(){
-              return []
+            recommends:{
+              type:Array,
+              default(){
+                return []
+              }
             }
-          }
         }
     }
 </script>
@@ -26,18 +27,20 @@
 <style scoped>
 .recommends{
   display: flex;
+  width: 100%;
   justify-content: space-around;
-  /*text-align: center;*/
-  /*margin-bottom: 30px;*/
-  padding: 10px 0px 20px 0px;
-  /*background: red;*/
+  font-size: 15px;
+
+  padding: 10px 0 20px;
+  border-bottom: 10px solid #eee;
 }
-/*.recommend-item {*/
-/*    flex: 1;*/
-/*  }*/
+.recommends-item{
+  text-align: center;
+}
   .recommends img{
-    width: 70px;
-    height: 70px;
-    margin-bottom: 10px;
+    height: 75px;
+    width: 75px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 </style>
