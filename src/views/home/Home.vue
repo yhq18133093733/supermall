@@ -12,8 +12,9 @@
       <feature-view/>
       <tab-control-test
                    :titles="['流行', '新款', '精选']"
+                   @tabClick="tabClick"
                    />
-<!--      <good-list :goods="showGoods"/>-->
+      <good-list :goods="showGoods"/>
     </scroll>
     <div>呵呵呵呵</div>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
@@ -81,6 +82,7 @@
        * 事件监听相关的方法
        */
       tabClick(index) {
+        console.log(index);
         switch (index) {
           case 0:
             this.currentType = 'pop'
