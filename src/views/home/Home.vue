@@ -10,7 +10,7 @@
       <home-swiper :banners="banners"/>
       <recommend-view-test :recommends="recommends"/>
       <feature-view/>
-      <tab-control class="tab-control"
+      <tab-control-test class="tab-control"
                    :titles="['流行', '新款', '精选']"
                    @tabClick="tabClick"/>
       <good-list :goods="showGoods"/>
