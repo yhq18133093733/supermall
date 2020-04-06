@@ -6,7 +6,7 @@
             :probe-type="3"
             @scroll="contentScroll"
             :pull-up-load="true"
-            @pullingUp="loadMore">
+    >
       <home-swiper :banners="banners"/>
       <recommend-view-test :recommends="recommends"/>
       <feature-view/>
@@ -76,8 +76,31 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
+
+    },
+    mounted() {
+      const refresh = this.debounce(this.$refs.scroll.refreshed,50);
+      this.$bus.$on('imgLoading', () =>{
+        // this.$refs.scroll &&  this.debounce(this.$refs.scroll.refreshed,50)
+        // 这里不能直接this.debounce，因为这样只会执行debounce,获得返回函数，而不会执行返回的函数
+        this.$refs.scroll && refresh()
+      })
     },
     methods: {
+      //防抖函数
+      debounce(func,delayTime){
+        console.log('111');
+        let timer = null;
+        return function (...args) {
+          // console.log('222');
+          if (timer)clearTimeout(timer)
+          timer = setTimeout( () =>{
+            // console.log('333');
+            func.apply(this,args)
+          },delayTime)
+        }
+      },
+
       /**
        * 事件监听相关的方法
        */
@@ -120,7 +143,6 @@
         getHomeGoods(type, this.goods[type].page).then(res => {
           this.goods[type].list.push(...res.data.list)
 
-          this.$refs.scroll.finishPullUp()
         })
       }
     }
