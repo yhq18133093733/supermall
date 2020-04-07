@@ -6,6 +6,7 @@
             :probe-type="3"
             @scroll="contentScroll"
             :pull-up-load="true"
+            @pullingUp="loadMore"
     >
       <home-swiper :banners="banners"/>
       <recommend-view-test :recommends="recommends"/>
@@ -92,7 +93,7 @@
         console.log('111');
         let timer = null;
         return function (...args) {
-          // console.log('222');
+          console.log(timer);
           if (timer)clearTimeout(timer)
           timer = setTimeout( () =>{
             // console.log('333');
@@ -142,7 +143,7 @@
         this.goods[type].page += 1
         getHomeGoods(type, this.goods[type].page).then(res => {
           this.goods[type].list.push(...res.data.list)
-
+          this.$refs.scroll.finishPullUp();
         })
       }
     }
