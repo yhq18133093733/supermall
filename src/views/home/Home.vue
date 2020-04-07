@@ -24,6 +24,7 @@
 
 <script>
   //测试回滚
+  //测试回滚222
   import HomeSwiper from './childComps/HomeSwiper'
   import RecommendView from './childComps/RecommendView'
   import RecommendViewTest from './childComps/RecommendViewTest'
