@@ -27,6 +27,11 @@
         message: '哈哈哈'
       }
     },
+    computed: {
+      scrollY() {
+        return this.scroll.y
+      }
+    },
     mounted() {
       // 1.创建BScroll对象
       this.scroll = new BScroll(this.$refs.wrapper, {

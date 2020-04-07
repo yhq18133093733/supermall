@@ -72,7 +72,8 @@
         currentType: 'pop',
         isShowBackTop: false,
         tabcontrol:false,
-        offsetTopL:0
+        offsetTopL:0,
+        saveY:0
       }
     },
     computed: {
@@ -98,11 +99,20 @@
         this.$refs.scroll && refresh()
       })
     },
+    // activated() {
+    //   console.log(this.saveY);
+    //   this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    // },
+    // deactivated() {
+    //   this.saveY = this.$refs.scroll.scrollY
+    // },
     methods: {
+      //计算contentTab离顶部的距离
       swiperLoaded(){
-        this.offsetTopL=this.$refs.contentTab.$el.offsetTop
+        this.offsetTopL=this.$refs.contentTab.$el.offsetTop;
+        this.$refs.scroll.refreshed()
       },
-      //防抖函数
+      //防抖函数，减少请求次数
       debounce(func,delayTime){
         let timer = null;
         return function (...args) {
@@ -145,7 +155,7 @@
       },
       loadMore() {
         this.getHomeGoods(this.currentType);
-        this.$refs.scroll.scroll.refresh();
+        this.$refs.scroll.refreshed();
       },
       /**
        * 网络请求相关的方法
