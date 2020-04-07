@@ -3,7 +3,7 @@
    <!--    加 :key  不然会有warning-->
     <swiper-item v-for="(item, index) in banners" :key="index">
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt="" @load="imageLoad">
       </a>
     </swiper-item>
   </swiper>
@@ -22,9 +22,23 @@
         }
       }
     },
+    data(){
+      return{
+        onceLoad:false
+      }
+
+    },
     components: {
       Swiper,
       SwiperItem
+    },
+    methods:{
+     imageLoad(){
+       if (!this.onceLoad){
+         this.$emit('swiperLoaded')
+         this.onceLoad = true
+       }
+     }
     }
   }
 </script>

@@ -54,7 +54,6 @@
         this.scroll.finishPullUp()
       },
       refreshed(){
-        console.log('-----');
         this.scroll.refresh();
       }
     }

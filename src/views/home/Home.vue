@@ -1,6 +1,13 @@
 <template>
   <div id="home" class="wrapper">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <tab-control-test
+                   :titles="['流行', '新款', '精选']"
+                   ref="contentTabTop"
+                   @tabClick="tabClick"
+                   class="tab-control"
+                   v-show="tabcontrol"
+                   />
     <scroll class="content"
             ref="scroll"
             :probe-type="3"
@@ -8,16 +15,16 @@
             :pull-up-load="true"
             @pullingUp="loadMore"
     >
-      <home-swiper :banners="banners"/>
+      <home-swiper :banners="banners" @swiperLoaded="swiperLoaded"/>
       <recommend-view-test :recommends="recommends"/>
       <feature-view/>
       <tab-control-test
                    :titles="['流行', '新款', '精选']"
+                   ref="contentTab"
                    @tabClick="tabClick"
                    />
       <good-list :goods="showGoods"/>
     </scroll>
-    <div>呵呵呵呵</div>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
   </div>
 </template>
@@ -63,7 +70,9 @@
           'sell': {page: 0, list: []},
         },
         currentType: 'pop',
-        isShowBackTop: false
+        isShowBackTop: false,
+        tabcontrol:false,
+        offsetTopL:0
       }
     },
     computed: {
@@ -90,15 +99,16 @@
       })
     },
     methods: {
+      swiperLoaded(){
+        this.offsetTopL=this.$refs.contentTab.$el.offsetTop
+      },
       //防抖函数
       debounce(func,delayTime){
-        console.log('111');
         let timer = null;
         return function (...args) {
-          console.log(timer);
+          // console.log(timer);
           if (timer)clearTimeout(timer)
           timer = setTimeout( () =>{
-            // console.log('333');
             func.apply(this,args)
           },delayTime)
         }
@@ -108,7 +118,6 @@
        * 事件监听相关的方法
        */
       tabClick(index) {
-        console.log(index);
         switch (index) {
           case 0:
             this.currentType = 'pop'
@@ -120,12 +129,19 @@
             this.currentType = 'sell'
             break
         }
+        if (this.tabcontrol){
+          this.$refs.contentTab.currentIndex=this.$refs.contentTabTop.currentIndex
+        }else {
+          this.$refs.contentTabTop.currentIndex=this.$refs.contentTab.currentIndex
+        }
+
       },
       backClick() {
         this.$refs.scroll.scrollTo(0, 0)
       },
       contentScroll(position) {
         this.isShowBackTop = (-position.y) > 1000
+        this.tabcontrol=(-position.y) > this.offsetTopL
       },
       loadMore() {
         this.getHomeGoods(this.currentType);
@@ -163,11 +179,11 @@
     background-color: var(--color-tint);
     color: #fff;
 
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 9;
+    /*position: fixed;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*z-index: 9;*/
   }
 
   .tab-control {

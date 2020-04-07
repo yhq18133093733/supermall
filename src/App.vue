@@ -1,7 +1,9 @@
 <template>
   <div id="app" class="wrapper">
 <!--<router-view的作用：匹配到相应路径后显示在页面上    -->
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <main-tab-bar/>
   </div>
 </template>

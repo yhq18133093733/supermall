@@ -30,7 +30,6 @@
       methods:{
         activeClick(index){
           this.currentIndex=index;
-          console.log("tabclick");
           this.$emit('tabClick',index)
         }
       }
