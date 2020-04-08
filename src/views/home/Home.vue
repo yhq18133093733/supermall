@@ -89,7 +89,6 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
-
     },
     mounted() {
       const refresh = this.debounce(this.$refs.scroll.refreshed,50);
@@ -99,13 +98,13 @@
         this.$refs.scroll && refresh()
       })
     },
-    // activated() {
-    //   console.log(this.saveY);
-    //   this.$refs.scroll.scrollTo(0, this.saveY, 0)
-    // },
-    // deactivated() {
-    //   this.saveY = this.$refs.scroll.scrollY
-    // },
+    activated() {
+      this.$refs.scroll.scrollTo(0, this.saveY, 0)
+      this.$refs.scroll.refreshed()
+    },
+    deactivated() {
+      this.saveY = this.$refs.scroll.scrollY
+    },
     methods: {
       //计算contentTab离顶部的距离
       swiperLoaded(){
@@ -139,11 +138,9 @@
             this.currentType = 'sell'
             break
         }
-        if (this.tabcontrol){
-          this.$refs.contentTab.currentIndex=this.$refs.contentTabTop.currentIndex
-        }else {
-          this.$refs.contentTabTop.currentIndex=this.$refs.contentTab.currentIndex
-        }
+
+          this.$refs.contentTab.currentIndex=index
+          this.$refs.contentTabTop.currentIndex=index
 
       },
       backClick() {
