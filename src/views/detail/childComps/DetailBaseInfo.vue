@@ -45,11 +45,11 @@
     border-bottom: 5px solid #f2f5f8;
   }
 .goods-title{
-  color: #222
+  color: #222;
+  margin-top: 20px;
 }
   .price-info{
     margin-top: 15px;
-    /*padding: 5px;*/
   }
   .nInfo{
     color: #ff1955;
@@ -82,7 +82,7 @@
   .shopInfo-services{
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 5px;
     color: black;
     font-size: 13px;
     line-height: 60px;

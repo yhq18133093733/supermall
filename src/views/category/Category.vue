@@ -7,6 +7,7 @@
       <!--2.必须设置click:true, 那么div才能监听点击-->
       <div @click="divClick">呵呵呵呵</div>
 
+      <el-button type="success" @click="btnClick">element</el-button>
       <ul class="content">
         <li>分类列表1</li>
         <li>分类列表2</li>
@@ -120,7 +121,8 @@
     name: "Category",
     data() {
       return {
-        scroll: null
+        scroll: null,
+
       }
     },
     // 组件创建完后调用
@@ -144,7 +146,8 @@
       },
       divClick() {
         console.log('divClick');
-      }
+      },
+
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar >
+    <nav-bar class="nav-bar">
       <img slot="left" class="imgLeft" @click="back" src="~assets/img/common/back.svg" alt="">
       <div slot="center" class="topBar">
         <div v-for="(item,index) in detailTitle"
@@ -39,6 +39,11 @@
 </script>
 
 <style scoped>
+  .nav-bar{
+    position: relative;
+    z-index: 1;
+    background: white;
+  }
 .topBar{
   display: flex;
   justify-content: space-around;
