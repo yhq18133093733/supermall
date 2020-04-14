@@ -6,9 +6,9 @@
   </swiper>
 </template>
 
-<script>
+<script> 
   import { Swiper, SwiperItem} from 'components/common/swiper/index'
-    export default {
+    export default { 
         name: "DetailSwiper",
       props: {
         topImg: {

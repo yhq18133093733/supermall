@@ -7,7 +7,7 @@
         <span class="nInfo">{{goods.newPrice}}</span>
         <span class="oInfo">{{goods.oldPrice}}</span>
         <span class="dInfo">{{goods.discount}}</span>
-      </div>
+      </div> 
       <div class="base-columns">
         <span class="sell">{{goods.columns[0]}}</span>
         <span class="collect">{{goods.columns[1]}}</span>

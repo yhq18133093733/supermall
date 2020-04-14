@@ -7,7 +7,7 @@
         :class="{active:currentIndex === index}"
         @click="itemClick(index)"
         >
-          {{item}}
+          {{item}} 
         </div>
       </div>
     </nav-bar>
