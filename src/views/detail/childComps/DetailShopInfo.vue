@@ -1,5 +1,5 @@
 <template>
-    <div class="shop-info">
+    <div v-if="shopInfo != null" class="shop-info">
       <div class="logo-info">
         <img :src="shopInfo.shopLogo">
         <span class="shop-name">{{shopInfo.name}}</span>
@@ -8,7 +8,7 @@
         <div class="score-left">
           <div class="sells" style="text-align: center;">
             <div>
-              {{shopInfo.cSells}}
+              {{shopInfo.cSells | trans}}
             </div>
             <div style="font-size: 12px;padding-top: 5px">
               总销量
@@ -46,7 +46,13 @@
           shopInfo:{
             type:Object
           }
+      },
+      filters: {
+      trans: function(value) {
+        if (value < 10000) return value;
+        return (value/10000).toFixed(1) + '万'
       }
+    }
     }
 </script>
 
@@ -55,7 +61,7 @@
     /*position: relative;*/
     width: 100%;
     margin-top: 20px;
-    border-bottom: 3px solid #fff9ff;
+    border-bottom: 5px solid hsl(163, 16%, 91%);
   }
   .logo-info{
    display: flex;
@@ -83,9 +89,7 @@
     align-items: center;
     border-right: 1px solid #c1c1c1;
   }
-  .sells{
 
-  }
   .score-right{
     width: 50%;
     display: flex;

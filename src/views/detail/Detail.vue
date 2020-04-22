@@ -5,16 +5,8 @@
       <detail-swiper :topImg="detail"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shopInfo="shopInfo"></detail-shop-info>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
+      <detail-info-img :detailInfo="detailInfo"></detail-info-img>
+      <detail-params :item-params="itemParams"></detail-params>
     </scroll>
 
   </div>
@@ -25,6 +17,8 @@
     import DetailSwiper from "./childComps/DetailSwiper";
     import DetailBaseInfo from "./childComps/DetailBaseInfo";
     import DetailShopInfo from "./childComps/DetailShopInfo";
+    import DetailInfoImg from "./childComps/DetailInfoImg";
+    import DetailParams from "./childComps/DetailParams";
 
     import scroll from 'better-scroll'
     import {getDetail,Goods} from "network/detail";
@@ -37,14 +31,18 @@
         Scroll,
         DetailBaseInfo,
         DetailSwiper,
-          DetailTabBar
+        DetailTabBar,
+        DetailInfoImg,
+        DetailParams
       },
       data(){
         return{
           iid:null,
           detail:[],
           goods:{},
-          shopInfo:{}
+          shopInfo:{},
+          detailInfo:{},
+          itemParams:{}
         }
       },
       created() {
@@ -55,8 +53,10 @@
             getDetail(iid).then(res =>{
               this.detail=res.result.itemInfo.topImages;
               this.goods=new Goods(res.result.itemInfo,res.result.columns,res.result.shopInfo.services)
-              this.shopInfo=res.result.shopInfo
-              console.log(this.shopInfo);
+              this.shopInfo=res.result.shopInfo;
+              this.detailInfo=res.result.detailInfo;
+              this.itemParams=res.result.itemParams;
+              console.log(this.detailInfo);
             })
           }
       }
